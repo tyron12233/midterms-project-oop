@@ -102,14 +102,14 @@ public:
             printBottomBorder();
 
 
-            switch (getArrowKey()) {
+            switch (getKeyPressBlocking()) {
                 case KEY_UP:
                     if (currentOption > 1) {
                         currentOption--;
                     }
                     break;
                 case KEY_DOWN:
-                    if (currentOption < 5) {
+                    if (currentOption < options.size()) {
                         currentOption++;
                     }
                     break;

@@ -11,7 +11,7 @@
 
 using namespace std;
 
-inline int getArrowKey() {
+inline int getKeyPressBlocking() {
     int c = getch();
     if (c == 0 || c == 27) {
         const auto something =  getch();

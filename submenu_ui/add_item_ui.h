@@ -80,7 +80,7 @@ public:
 
 
             if (category == NONE) {
-                const auto key = getArrowKey();
+                const auto key = getKeyPressBlocking();
                 // handle input for category
                 if (key == KEY_LEFT) {
                     if (categoryIndex > 0) {

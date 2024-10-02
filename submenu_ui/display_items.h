@@ -109,7 +109,7 @@ public:
 
 
             // input
-            const auto key = getArrowKey();
+            const auto key = getKeyPressBlocking();
             if (key == KEY_LEFT) {
                 if (currentY == 0) {
                     // decrease filter to left
