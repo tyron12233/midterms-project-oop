@@ -162,5 +162,9 @@ public:
                     break;
             }
         }
+
+        // program is exiting at this point
+        clearScreen();
+        showNotice(L"Thank you!");
     }
 };
