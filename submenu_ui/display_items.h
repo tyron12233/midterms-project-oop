@@ -65,7 +65,12 @@ public:
 
 
             printEmptySpace();
-            printCenteredText(L"Filter options:");
+
+            if (currentY == 0) {
+                printCenteredText(L"--Filter Options--");
+            } else {
+                printCenteredText(L"Filter options:");
+            }
             // filtering options
             const vector<wstring> options = {
                 L"None",
@@ -79,7 +84,11 @@ public:
 
 
 
-            printCenteredText(L"Sort options: ");
+            if (currentY == 1) {
+                printCenteredText(L"--Sort Options--");
+            } else {
+                printCenteredText(L"Sort options: ");
+            }
             // sorting options
             const vector<wstring> sortOptions = {
                 L"Default",
@@ -100,7 +109,7 @@ public:
             printCenteredText(orderOptionsString);
             printEmptySpace();
 
-            const auto exitOptionString = getSelectionString({L"Exit"}, currentY == 3);
+            const auto exitOptionString = getSelectionString({L"Exit"}, currentY != 3);
             printCenteredText(exitOptionString);
 
 
@@ -162,10 +171,11 @@ public:
                             items = inventory.getItemsByCategory(displayCategoryType);
                         }
                     } catch (const invalid_argument &e) {
-                        // convert e.what to wstring
-                        wstring message(e.what(), e.what() + strlen(e.what()));
+                        // show no items found in category name
+                        wstring message;
+                        message.append(L"No items found in category: ");
+                        message.append(getCategoryName(displayCategoryType));
                         showNotice(message);
-
                     }
                 } else if (currentY == 1 || currentY == 2) {
                     bool ascending = orderIndex == 0;

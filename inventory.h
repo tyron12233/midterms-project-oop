@@ -202,7 +202,7 @@ public:
 class SortableInventory : public BaseInventory {
 public:
     // returns a vector of sorted items but not modifying the original items
-    vector<Item> getItemsSortedByQuantity(bool ascending) {
+    vector<Item> getItemsSortedByQuantity(const bool ascending) {
         const auto originalItems = items;
         sortItems(QUANTITY, ascending);
         const auto sortedItems = items;
@@ -210,7 +210,8 @@ public:
         return sortedItems;
     }
 
-    vector<Item> getItemsSortedByPrice(bool ascending) {
+    // returns a vector of sorted items but not modifying the original items
+    vector<Item> getItemsSortedByPrice(const bool ascending) {
         const auto originalItems = items;
         sortItems(PRICE, ascending);
         const auto sortedItems = items;
@@ -219,8 +220,8 @@ public:
     }
 
 
-
-    void sortItems(SortType sortType, bool ascending) override {
+    // sorts the items in the inventory, modifying the original items
+    void sortItems(const SortType sortType, const bool ascending) override {
         if (sortType == QUANTITY) {
             sortByQuantity(ascending);
         } else {
@@ -228,7 +229,7 @@ public:
         }
     }
 
-    void sortByQuantity(bool ascending) {
+    void sortByQuantity(const bool ascending) {
         // bubble sort
         for (int i = 0; i < items.size() - 1; i++) {
             for (int j = 0; j < items.size() - i - 1; j++) {
@@ -245,7 +246,7 @@ public:
         }
     }
 
-    void sortByPrice(bool ascending) {
+    void sortByPrice(const bool ascending) {
         // bubble sort
         for (int i = 0; i < items.size() - 1; i++) {
             for (int j = 0; j < items.size() - i - 1; j++) {
