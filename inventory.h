@@ -19,6 +19,15 @@ enum SortType {
 };
 
 
+wstring toUpper(const wstring &str) {
+    wstring upperStr = str;
+    for (auto &c: upperStr) {
+        c = towupper(c);
+    }
+
+    return upperStr;
+}
+
 
 // represents the different categories an item can belong to
 // either clothing, electronics, or entertainment
@@ -125,8 +134,19 @@ protected:
     vector<Item> items;
 public:
     Item searchItem(const wstring &id) override {
+        // specific search
         for (const auto &item: items) {
             if (item.getId() == id) {
+                return item;
+            }
+        }
+
+        // try with case insensitive search
+        for (const auto &item: items) {
+            const auto upperItemId = toUpper(item.getId());
+            const auto upperId = toUpper(id);
+
+            if (upperItemId == upperId) {
                 return item;
             }
         }
@@ -144,6 +164,11 @@ public:
                 items.erase(it);
                 return;
             }
+
+            if (toUpper(it->getId()) == toUpper(id)) {
+                items.erase(it);
+                return;
+            }
         }
 
         throw invalid_argument("Item not found");
@@ -152,6 +177,11 @@ public:
     void updateItem(const wstring &id, Item newItem) override {
         for (auto &item: items) {
             if (item.getId() == id) {
+                item = newItem;
+                return;
+            }
+
+            if (toUpper(item.getId()) == toUpper(id)) {
                 item = newItem;
                 return;
             }

@@ -18,5 +18,8 @@ add_executable(midterm_project_oop main.cpp
         submenu_ui/display_items.h
         submenu_ui/search_item.h
         submenu_ui/remove_item.h
+        submenu_ui/update_item.h
+        submenu_ui/update_item.h
+        submenu_ui/low_stock_items.h
 )
 target_link_libraries(midterm_project_oop ${CURSES_LIBRARIES})

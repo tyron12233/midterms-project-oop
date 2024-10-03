@@ -7,8 +7,10 @@
 #include "ui.h"
 #include "submenu_ui/add_item_ui.h"
 #include "submenu_ui/display_items.h"
+#include "submenu_ui/low_stock_items.h"
 #include "submenu_ui/remove_item.h"
 #include "submenu_ui/search_item.h"
+#include "submenu_ui/update_item.h"
 
 using namespace std;
 
@@ -48,6 +50,31 @@ public:
     void display() {
         int currentOption = 1;
 
+        this->inventory.addItem({
+            CLOTHING,
+            L"Shirt",
+            L"S10",
+            10,
+            10
+        });
+
+        // sample data
+        this->inventory.addItem({
+            CLOTHING,
+            L"Shorts",
+            L"S11",
+            5,
+            75
+        });
+
+        this->inventory.addItem({
+            CLOTHING,
+            L"Shoes",
+            L"S12",
+            3,
+            100
+        });
+
 
         const auto options = vector<Action>{
             {
@@ -67,6 +94,14 @@ public:
             },
 
             {
+                L"Display Low Stock Items",
+                [this] {
+                    LowStockItemsUi lowStockItemsUi(inventory);
+                    lowStockItemsUi.display();
+                }
+            },
+
+            {
                 L"Search Item",
                 [this] {
                     SearchItemUi searchItemUi(inventory);
@@ -79,6 +114,14 @@ public:
                 [this] {
                     RemoveItemUi removeItemUi(inventory);
                     removeItemUi.display();
+                }
+            },
+
+            {
+                L"Update Item",
+                [this] {
+                    UpdateItemUi updateItemUi(inventory);
+                    updateItemUi.display();
                 }
             },
 
